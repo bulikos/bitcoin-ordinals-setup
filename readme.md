@@ -2,7 +2,7 @@
 This document is extended guide to help you produce your first [ordinal](https://ordinals.com/). I highly recommend to first browse the original [ordinals handbook](https://docs.ordinals.com/).
 
 ## BitcoinCore
-BitcoinCore is a Bitcoin node software, which is going to serve the requests from orb wallet. Let's start with installing and running BitcoinCore.
+BitcoinCore is a Bitcoin node software, which is going to serve the requests from ord wallet. Let's start with installing and running BitcoinCore.
 
 ### Install BitcoinCore
 Download and install 
@@ -23,7 +23,7 @@ Download and install
 - `bitcoind -version`
 
 ### Configure and run BitcoinCore
-Here are two options, either setup a daemon running the program in background, or run the program directly in terminal window. The `tx-index` option used in both options will download all transactions (not only blocks) to local disk using the `$HOME/.bitcoin` direcotory, make sure to have at least +500GB of free space. Mentioned option is mandatory for orb wallet, as the wallet later based on this transactions builds index of satoshis. The `rest` option enables REST API calls.
+Here are two options, either setup a daemon running the program in background, or run the program directly in terminal window. The `tx-index` option used in both options will download all transactions (not only blocks) to local disk using the `$HOME/.bitcoin` direcotory, make sure to have at least +500GB of free space. Mentioned option is mandatory for ord wallet, as the wallet later based on this transactions builds index of satoshis. The `rest` option enables REST API calls.
 
 - Run daemon option:
   - Start daemon process - `bitcoind -txindex -rest -daemon`
@@ -35,18 +35,18 @@ Here are two options, either setup a daemon running the program in background, o
 ### Check status of syncing
 After starting the BitcoinCore you can check status of synchronization (downloading all blocks and txs to your disk) with command `bitcoin-cli getblockcount` and `bitcoin-cli getindexinfo`, the numbers should within several hours match the current blockchain height (which can be found [online](https://mempool.space/)).
 
-## Orb wallet
-Once we have sucuessfully started and synced the Bitcoin node we can start working with orb wallet.
+## Ord wallet
+Once we have sucuessfully started and synced the Bitcoin node we can start working with ord wallet.
 
-### Install Orb and prepare wallet
+### Install Ord and prepare wallet
 
-1. Download and install orb wallet
+1. Download and install ord wallet
 - `curl --proto '=https' --tlsv1.2 -fsLS https://ordinals.com/install.sh | bash -s`
 
 2. Verifiy installation by priting ord version.
 - `ord --version`
 
-3. For those getting the Command 'ord' not found error. Navigate to bin folder inside your home directory - `cd $HOME/bin` and try running `./ord --version`. If it helped, hold on inside this directory and always use `./orb` instead of the `orb` in following commands. 
+3. For those getting the Command 'ord' not found error. Navigate to bin folder inside your home directory - `cd $HOME/bin` and try running `./ord --version`. If it helped, hold on inside this directory and always use `./ord` instead of the `ord` in following commands. 
 
 4. Prepare wallet (its recommended to create a new one).
 - `ord wallet create`, remember to save you seed phrase.
@@ -57,7 +57,7 @@ Once we have sucuessfully started and synced the Bitcoin node we can start worki
 6. Check status of transactions
 - `ord wallet transactions` and `ord wallet outputs`
 
-### Build orb index
+### Build ord index
 1. To produce ordinals the ord first needs to build an index. In my case this operation took more time than syncing the BitcoinCore. The command will show you the current progress.
 - `ord index`
 
