@@ -8,7 +8,7 @@ BitcoinCore is a Bitcoin node software, which is going to serve the requests fro
 Download and install 
 
 1. Make and enter directory for following actions.
-- `mkdir btc1` and `cd btc1`
+- `mkdir my_folder` and `cd my_folder`
 
 2. Download BitcoinCore tar archive.
 - `curl -O https://bitcoincore.org/bin/bitcoin-core-24.0.1/bitcoin-24.0.1-x86_64-linux-gnu.tar.gz`
@@ -23,17 +23,17 @@ Download and install
 - `bitcoind -version`
 
 ### Configure and run BitcoinCore
-Here are two options, either setup a daemon running the program in background, or run the program directly in terminal window. The `tx-index` option used in both options will download all transactions (not only blocks) to local disk using the `$HOME/.bitcoin` direcotory, make sure to have at least +500GB of free space. This option is mandatory for orb wallet, as the wallet later based on this transactions builds index of satoshis.
+Here are two options, either setup a daemon running the program in background, or run the program directly in terminal window. The `tx-index` option used in both options will download all transactions (not only blocks) to local disk using the `$HOME/.bitcoin` direcotory, make sure to have at least +500GB of free space. Mentioned option is mandatory for orb wallet, as the wallet later based on this transactions builds index of satoshis. The `rest` option enables REST API calls.
 
 - Run daemon option:
-  - Start daemon process - `bitcoind -txindex -daemon`
+  - Start daemon process - `bitcoind -txindex -rest -daemon`
   - To stop the daemon use `bitcoin-cli stop`
 - Run program directly option:
-  - Start program `bitcoind -txindex`.
+  - Start program `bitcoind -txindex -rest`.
   - To stop the program close the terminal or use CTRL+C keys.
 
-#### Check status
-After starting the BitcoinCore you can check status of synchronization (downloading all blocks and txs to your disk) with command `bitcoin-cli getblockcount`, this number should within several hours match the current blockchain height (which can be found somewhere online).
+### Check status of syncing
+After starting the BitcoinCore you can check status of synchronization (downloading all blocks and txs to your disk) with command `bitcoin-cli getblockcount` and `bitcoin-cli getindexinfo`, the numbers should within several hours match the current blockchain height (which can be found [online](https://mempool.space/)).
 
 ## Orb wallet
 Once we have sucuessfully started and synced the Bitcoin node we can start working with orb wallet.
@@ -60,3 +60,13 @@ Once we have sucuessfully started and synced the Bitcoin node we can start worki
 ### Build orb index
 1. To produce ordinals the ord first needs to build an index. In my case this operation took more time than syncing the BitcoinCore. The command will show you the current progress.
 - `ord index`
+
+### Send your first inscription
+1. Create file you want to upload, you can use nano to create text file.
+- `nano`
+2. First check some balance
+- `ord wallet balance`
+3. Simulate inscription creation (without broadcasting transaction) to get estimation of total fees. Be sure to use the option --fee-rate with optimal value, otherwise will be used the default value (1) and your tx may get stuck in mempool. The current optimal fee can be obtained from [here](https://fees.truelevel.io/#/btc).
+- `ord wallet inscribe --fee-rate 15 --dry-run text.txt`
+4. Create inscription with broadcasting.
+- `ord wallet inscribe --fee-rate 15 text.txt`
