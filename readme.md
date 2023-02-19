@@ -58,7 +58,7 @@ Once we have sucuessfully started and synced the Bitcoin node we can start worki
 - `ord wallet transactions` and `ord wallet outputs`
 
 ### Build ord index
-1. To produce ordinals the ord first needs to build an index. In my case this operation took more time than syncing the BitcoinCore. The command will show you the current progress.
+1. To produce ordinals the ord first needs to build an index. In my case this operation took more time than syncing the BitcoinCore. The command will show you the current progress. Ord index is stored in ~/.local/share/ord directory
 - `ord index`
 
 ### Send your first inscription
